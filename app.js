@@ -1,28 +1,29 @@
-// Modules
+//Modules
 const express = require('express');
 
 const db = require('./models')
+const pageRouter = require('./routes/pageRoute')
+const portfolioRouter = require('./routes/portfolioRoute')
 
-// Application
+//Application
 const app = express();
 
-// Template Engine
-app.set('view engine', 'ejs');
+//View Engine
+app.set('view engine', 'ejs')
 
-// Middleware
-app.use(express.static('public'));
+//Middleware
+app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Get Request
-app.get('/', (req, res) => {
-    res.render('index');
-});
+//Routers
+app.use('/', pageRouter);
+app.use('/portfolios', portfolioRouter)
 
-// Server Connection
-const port = 8080;
+//Connect the Server
+const port = process.env.PORT || 8080;
 db.sequelize.sync().then(() => {
-    app.listen(port, () => {
-        console.log(`Server is Connected Port: ${port}`);
-    });
-})
+  app.listen(port, () => {
+    console.log(`Server is connected to ${port}`)
+  });
+});
