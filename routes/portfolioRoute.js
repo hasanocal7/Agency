@@ -31,7 +31,7 @@ const upload = multer({
 });
 
 router.post("/", upload.single('image'), portfolioController.createPortfolio);
-router.post("/:id", portfolioController.deletePortfolio);
-router.post("/:id", portfolioController.updatePortfolio);
+router.delete("/:id", portfolioController.deletePortfolio);
+router.put("/:id", portfolioController.updatePortfolio);
 
 module.exports = router;
