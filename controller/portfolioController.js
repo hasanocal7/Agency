@@ -33,8 +33,9 @@ exports.deletePortfolio = async (req, res) => {
     res.status(200).redirect('/');
 };
 
-exports.updatePortfolio = async (req, res) => {
-  let id = req.params.id;
-  await Portfolios.update({ where: { id: id}})
-  res.status(200).redirect('/');
+exports.updatePortfolio = (req, res) => {
+  const body = req.body
+  console.log(body)
+  Portfolios.update(body, { where: { id: req.params.id }});
+  res.redirect(`/`);
 }

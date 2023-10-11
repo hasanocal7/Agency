@@ -42,7 +42,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
+                                    <!-- Portfolio details-->
                                     <h2 class="text-uppercase"><%= portfolios[i].name %></h2>
                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                                     <img class="img-fluid d-block mx-auto" src="/<%= portfolios[i].image %>" alt="..." />
@@ -57,15 +57,18 @@
                                             <%= portfolios[i].category %>
                                         </li>
                                     </ul>
-                                    <form action="/portfolios/<%= portfolios[i].id %>" method="POST">
-                                        <input type="hidden" name="_method" value="DELETE">
+                                    <form action="/portfolios/<%= portfolios[i].id %>?_method=DELETE" method="POST">
                                         <button type="submit" onclick="return confirm('EMİN MİSİNİZ')" class="btn btn-danger btn-xl text-uppercase">
                                           <i class="fas fa-times me-1"></i> Delete Portfolio
                                         </button>
-                                      </form>                                      
+                                    </form>
+                                    <a class="btn btn-secondary btn-xl text-uppercase" data-bs-toggle="modal" href="#updatePortfolio<%= portfolios[i].id %>">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Update Portfolio
+                                    </a>                                    
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Close Portfolio
                                     </button>
                                 </div>
                             </div>
@@ -74,6 +77,47 @@
                 </div>
             </div>
         </div>
+        <!-- Update Portfolio modal popup -->
+                <div class="portfolio-modal modal fade" id="updatePortfolio<%= portfolios[i].id %>" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8">
+                                        <div class="modal-body">
+                                            <form id="contactForm" method="POST" action="/portfolios/<%= portfolios[i].id %>?_method=PUT">
+                                                <div class="row align-items-stretch mb-5">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input value="<%= portfolios[i].name %>" class="form-control" name="name" type="text" placeholder="Name *"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input value="<%= portfolios[i].client %>" class="form-control" name="client" type="text" placeholder="Client *"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input value="<%= portfolios[i].category %>" class="form-control" name="category" type="text" placeholder="Category *"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-textarea mb-md-0">
+                                                            <textarea class="form-control" name="description" placeholder="Description *"><%= portfolios[i].description %>"</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-secondary btn-xl text-uppercase" id="submitButton" type="submit">Update Portfolio</button>
+                                            </form>
+                                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                                <i class="fas fa-xmark me-1"></i>
+                                                Close Project
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <% } %>
     </div>
 </div>
