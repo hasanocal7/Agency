@@ -27,11 +27,14 @@ exports.createPortfolio = async (req, res) => {
   }
 };
 
+exports.deletePortfolio = async (req, res) => {
+    let id = req.params.id;
+    await Portfolios.destroy({ where: { id: id}})
+    res.status(200).redirect('/');
+};
 
-exports.getOnePortfolio = async (req, res) => {
-    let id = req.params.id
-    let portfolio = await Portfolios.findOne({ where: { id: id }})
-    res.render('index', {
-        portfolio,
-    });
+exports.updatePortfolio = async (req, res) => {
+  let id = req.params.id;
+  await Portfolios.update({ where: { id: id}})
+  res.status(200).redirect('/');
 }
