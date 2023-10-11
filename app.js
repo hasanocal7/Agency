@@ -1,6 +1,6 @@
 //Modules
 const express = require('express');
-
+const cors = require('cors');
 const db = require('./models')
 const pageRouter = require('./routes/pageRoute')
 const portfolioRouter = require('./routes/portfolioRoute')
@@ -12,6 +12,7 @@ const app = express();
 app.set('view engine', 'ejs')
 
 //Middleware
+app.use(cors())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

@@ -1,16 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { Portfolios } = require("../models");
+const multer = require('multer');
+const upload = multer({ dest: 'public/uploads/' }); 
+const portfolioController = require('../controller/portfolioController')
 
-router.get("/", async (req, res) => {
-  const listOfPortfolios = await Portfolios.findAll();
-  res.json(listOfPortfolios);
-});
-
-router.post("/", async (req, res) => {
-  const portfolio = req.body;
-  await Portfolios.create(portfolio);
-  res.status(201).redirect('/');
-});
+//router.get("/", portfolioController.getOnePortfolio);
+router.post("/", upload.single('image'), portfolioController.createPortfolio);
 
 module.exports = router;
