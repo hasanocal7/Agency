@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "123456",
+    "password": "123",
     "database": "agencydb",
-    "host": "localhost",
+    "host": "mysql-server",
     "dialect": "mysql"
   }
 }
