@@ -25,7 +25,7 @@ app.use('/', pageRouter);
 app.use('/portfolios', portfolioRouter)
 
 //Connect the Server
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 db.sequelize.sync().then(() => {
   app.listen(port, () => {
     console.log(`Server is connected to ${port}`)

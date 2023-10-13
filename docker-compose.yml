@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+  agency-app:
+    container_name: Agency
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysqlserver
+    volumes:
+      - agency-uploads:/public/uploads
+  mysqlserver:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: agencydb
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    environment:
+      PMA_HOST: mysqlserver
+      PMA_PORT: 3306
+    ports:
+      - 8080:80
+    depends_on:
+      - mysqlserver
+
+volumes:
+  mysql_data:
+  agency-uploads:

@@ -3,7 +3,7 @@
     "username": "root",
     "password": "123",
     "database": "agencydb",
-    "host": "mysql-server",
+    "host": "mysqlserver",
     "dialect": "mysql"
   }
 }
